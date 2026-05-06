@@ -15,15 +15,16 @@ export async function POST(req: NextRequest) {
 
     // Operator notification email
     await resend.emails.send({
-      from: "orders@operationprofitllc.info",
+      from: "noreply@operationprofitllc.com",
       to: process.env.NEXT_PUBLIC_NOTIFY_EMAIL ?? "",
+      replyTo: formData.businessInfo.email,
       subject: `New Website Order — ${companyName} — ${templateName}`,
       text: orderBody,
     });
 
     // Client confirmation email
     await resend.emails.send({
-      from: "noreply@operationprofitllc.info",
+      from: "stephen@operationprofitllc.com",
       to: formData.businessInfo.email,
       subject: "Your Order Has Been Received — Operation Profit Asset Recovery",
       text: [
